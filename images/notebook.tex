@@ -1,0 +1,1311 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{NARMS\_Analysis}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{is-antimicrobial-resistance-increasing}{%
+\section{Is Antimicrobial Resistance
+Increasing?}\label{is-antimicrobial-resistance-increasing}}
+
+\hypertarget{data-science-prep-course-capstone-data-analysis-report}{%
+\section{Data Science Prep Course: Capstone Data Analysis
+Report}\label{data-science-prep-course-capstone-data-analysis-report}}
+
+\hypertarget{github-httpsgithub.comrichardgorham1ds-prep-capstone.git}{%
+\section{Github:
+https://github.com/richardgorham1/ds-prep-capstone.git}\label{github-httpsgithub.comrichardgorham1ds-prep-capstone.git}}
+
+    \hypertarget{summary}{%
+\subsection{Summary}\label{summary}}
+
+The World Health Organization has found increase in antimicrobial
+resistance in every region of the world. Antimicrobial resistance
+contributes to 23,000 deaths per year in the US and 25,000 deaths per
+year in the EU. High proportion of resistance is found in all world
+regions. Over use of antimicrobial drugs have led to the proliferation
+of resistant bacteria. The National Antimicrobial Resistance Monitoring
+System has been tracking the incidences of antimicrobial resistance
+since the mid 1990's. Analysis of the enteric bacteria dataset seems to
+show that the incidence of resistance is increasing starting from 2010.
+The data does not address the prevalence of resistance in the
+ecosystems, as specimens were only collected once a disease was
+observed. The database includes some information on the plasmid markers
+that express resistance, these sequences along with others known can be
+aligned to sequences in the American Gut Biome database to develop an
+understanding of the potential prevalence of resistance. In this chart
+the proportion of enteric bacteria resistant to one or more
+antimicrobials is plotted against the year isolated. On average, about
+8\% of enteric bacteria are resistance to some antimicrobial. Though the
+last three years there is indication that resistance is increasing, a
+short trend increasing and the last point is greater that 3 standard
+deviations from the mean. World Health Organization. Antimicrobial
+resistance: global report on surveillance. World Health Organization
+2014
+
+    \hypertarget{introduction}{%
+\subsection{Introduction}\label{introduction}}
+
+Data Set: National Antimicrobial Resistance Monitoring System for
+Enteric Bacteria (NARMS) https://wwwn.cdc.gov/narmsnow/¶\\
+Data set size - 54352 columns, 106 rows
+
+    \hypertarget{microbial-resistance}{%
+\subsubsection{Microbial Resistance}\label{microbial-resistance}}
+
+Antimicrobial resistance is thought to occur due to selection pressure
+from the wide spread use of antibiotics. Three steps detail selected
+pressure. First, an infection is observed. Second the infection is
+treated by an antibiotic. Third, some very small fraction of organisms,
+exposed to the antibiotic, are not inactivated but rather develop a
+resistant response or an ability to tolerate the substance. Also,
+agricultural practices create analogous selection pressures. First,
+bacterial infections are a concern to agriculturalists. Second,
+antibiotics are given to animals as prophylactics. Third, some (very
+small fraction of) organisms develop a resistant response. Not only can
+the now resistant organisms increase in number with respect to the
+general population, they can also pass along the characteristic.
+Resistance is generally encoded in a genetic structure, separate from
+the chromosomal DNA, called a plasmid. Plasmids are replicated through
+binary fission and they can be transferred between bacteria of the same
+or of different species. Beceiro \emph{et. al.} (2013) propose that the
+mechanisms for virulence are closely tied to antimicrobial resistance.
+Given these conditions, an increase in antimicrobial resistance is
+expected. Beceiro, A., Tomás, M., \& Bou, G. (2013). Antimicrobial
+Resistance and Virulence: a Successful or Deleterious Association in the
+Bacterial World? Clinical Microbiology Reviews, 26(2), 185--230.
+http://doi.org/10.1128/CMR.00059-12
+
+    \hypertarget{national-antimicrobial-resistance-monitoring-system}{%
+\subsubsection{National Antimicrobial Resistance Monitoring
+System}\label{national-antimicrobial-resistance-monitoring-system}}
+
+The National Antimicrobial Resistance Monitoring System is a
+collaborative program of the US Food and Drug Administration (FDA), the
+Centers for Disease Control (CDC), US Department of Agriculture (USDA),
+and state and local public health departments. The program monitors the
+incidences of antimicrobial resistance in communicable and
+non-communicable pathogens from all transmission routes. The dataset in
+this study is specifically four genera of enteric bacteria most commonly
+transmitted through food.
+
+    \hypertarget{potential-issues-with-the-dataset}{%
+\subsubsection{Potential Issues with the
+Dataset}\label{potential-issues-with-the-dataset}}
+
+Note 1
+
+Data from 1996 through 2002 may not be representative of nationwide
+trends. Data collected began in 1996 and continues through the present.
+From 1996 through 2002, only 14 states participated, in 2003 the program
+was expanded nationwide. \#\#\#\#\#\# Note 2 Data may suffer from
+selection bias. Data is collected based on incidences of foodborne
+illness outbreaks large enough to illicit a public health investigation.
+This data may overestimate the rate of antimicrobial resistance.
+\#\#\#\#\#\# Note 3 The number of specimens collected and the population
+of the US both increased during the monitoring period. Any increase in
+antimicrobial resistance could be due in whole or in part to these
+trends, rather than an increase in prevalence.
+
+    \hypertarget{a-note-on-isolates}{%
+\subsubsection{A Note on isolates}\label{a-note-on-isolates}}
+
+Campylobacter, Escherichia, Salmonella, and Shigella are the monitored
+bacteria. Each is a gram-negative, facultative anaerobe that cause
+intestinal disease in humans and animals. Each is transmitted through
+fecal-oral contact, or by eating or drinking contaminated food or water.
+Species and serotypes have varying degrees of virulence, are generally
+non-fatal, though more threatening to young children, older adults, or
+immunocompromised individuals.
+
+    \hypertarget{methods}{%
+\subsection{Methods}\label{methods}}
+
+    \hypertarget{functions-and-modules}{%
+\subsubsection{Functions and Modules}\label{functions-and-modules}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{c+c1}{\PYZsh{}custom functions used}
+        \PY{k+kn}{import} \PY{n+nn}{data} \PY{k}{as} \PY{n+nn}{d}  
+        \PY{k+kn}{import} \PY{n+nn}{US\PYZus{}Population\PYZus{}1996\PYZus{}2015} \PY{k}{as} \PY{n+nn}{usp}
+        \PY{k+kn}{import} \PY{n+nn}{set\PYZus{}1}
+        \PY{k+kn}{import} \PY{n+nn}{regression\PYZus{}4\PYZus{}by\PYZus{}4} \PY{k}{as} \PY{n+nn}{rch}
+        \PY{k+kn}{import} \PY{n+nn}{resistance\PYZus{}level} \PY{k}{as} \PY{n+nn}{rl}
+        \PY{k+kn}{import} \PY{n+nn}{regression\PYZus{}and\PYZus{}p\PYZus{}chart} \PY{k}{as} \PY{n+nn}{rp}
+        \PY{k+kn}{import} \PY{n+nn}{residual\PYZus{}analysis} \PY{k}{as} \PY{n+nn}{ra}
+        \PY{k+kn}{import} \PY{n+nn}{least\PYZus{}squares} \PY{k}{as} \PY{n+nn}{ls}
+        \PY{k+kn}{import} \PY{n+nn}{pred\PYZus{}interval\PYZus{}95} \PY{k}{as} \PY{n+nn}{pred}
+        
+        \PY{c+c1}{\PYZsh{}standard modules}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{stats} \PY{k}{as} \PY{n+nn}{stats}
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+\end{Verbatim}
+
+
+    \hypertarget{base-data}{%
+\subsubsection{Base data}\label{base-data}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{df} \PY{o}{=} \PY{n}{d}\PY{o}{.}\PY{n}{data}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{IsolateData.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{pop} \PY{o}{=} \PY{n}{usp}\PY{o}{.}\PY{n}{US\PYZus{}Population\PYZus{}1996\PYZus{}2015}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{US\PYZus{}Population.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    The data frame contains 54352 rows and 106 columns. The data types of
+the 106 columns are 74 as ``object'', 31 as ``float64'', and one as
+``int64''. The columns list isolate taxonomy, date, geography, age group
+of the patient, and resistance information. The specimen ID is the ID of
+the individual isolate, Genus, Species, and Serotype are bacterial
+taxonomy descriptors. Data Year is the year of the specimen collection.
+Region Name is the Health and Human Services Department region number.
+Age Group is the age interval of the patient. Specimen Source is the
+substrate from which the isolate was collected. Resistance Pattern and
+Residence Determinants are genomic resistance patterns found if the
+isolate was sequenced. NCBI Accession Number and WGS ID are points to
+the whole genetic sequence, if sequenced. And 31 antibiotics are listed
+with equivalence (Equiv) results (Rslt), minimum inhibitory
+concentration, and a susceptibility conclusion (Concl).
+
+    \hypertarget{analysis}{%
+\subsection{Analysis}\label{analysis}}
+
+    \hypertarget{general-trends}{%
+\subsubsection{General Trends}\label{general-trends}}
+
+    \hypertarget{us-population}{%
+\paragraph{US Population}\label{us-population}}
+
+    The US population increased by about 52 million people during the period
+covering the data. An increase in enteric bacteria could be due to the
+increase in population.
+
+The chart shows a positive relationship between population and year. It
+is possible that an observed increase in the incidence of enteric
+bacteria could be due in part to the increase in population; as the
+opportunities for infection increase (population) the observations
+increase. Subsequent analysis is performed both raw and scaled to
+population.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{x} \PY{o}{=} \PY{n}{pop}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{n}{y} \PY{o}{=} \PY{n}{pop}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Value}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        
+        \PY{c+c1}{\PYZsh{}Plot charts}
+        
+        \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Population}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{n}{plt}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{xlim}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{1995}\PY{p}{,} \PY{l+m+mi}{2016}\PY{p}{)}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{1996}\PY{p}{,} \PY{l+m+mi}{2001}\PY{p}{,} \PY{l+m+mi}{2006}\PY{p}{,} \PY{l+m+mi}{2011}\PY{p}{,} \PY{l+m+mi}{2015}\PY{p}{]}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{US Population}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Millions of People}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{[}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{p}{]}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2015: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n}{y}\PY{p}{[}\PY{l+m+mi}{19}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{str}\PY{p}{)} \PY{o}{+} \PY{l+s+sa}{u}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ x 10}\PY{l+s+se}{\PYZbs{}u2076}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{[}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{p}{]}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1996: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n}{y}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{str}\PY{p}{)} \PY{o}{+} \PY{l+s+sa}{u}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ x 10}\PY{l+s+se}{\PYZbs{}u2076}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} 
+        \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc} \PY{o}{=} \PY{l+m+mi}{2}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}3}]:} []
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_17_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    An early idea for an analysis technique involves subtracting the linear
+fitted equation for population from the like equations for enteric
+bacteria. But analysis of the linear model for population showed that
+the model was not a valid fit (\emph{cf.} section 6.1) and that idea was
+abandoned for simple scaling.
+
+    \hypertarget{isolated-enteric-bacteria-by-year}{%
+\paragraph{Isolated Enteric Bacteria by
+Year}\label{isolated-enteric-bacteria-by-year}}
+
+    The number of incidences of enteric bacteria are increasing by 142 cases
+per year (0.4 cases per million people).
+
+The incidences of enteric bacteria are increasing for both raw numbers
+and when scaled to population. The database does not include negative
+observations, so no conclusions on prevalence are drawn.
+
+The increase in incidence appears to be free from the increase in
+population. But it still does not indicate increased risk. For example,
+the increase could be due to better monitoring systems, better publicity
+among clinicians, or an increase in resources.
+
+A linear regression was performed in each case. On both charts, the blue
+dots are the plotted data, the blue dashed line is the fitted data, the
+light blue area is the confidence interval for the line, and the red
+dashed lines are the prediction intervals for the data.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{set\PYZus{}1} \PY{o}{=} \PY{n}{set\PYZus{}1}\PY{o}{.}\PY{n}{set\PYZus{}1}\PY{p}{(}\PY{n}{df}\PY{p}{,} \PY{n}{pop}\PY{p}{)}
+        \PY{n}{x} \PY{o}{=} \PY{n}{set\PYZus{}1}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Data Year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{n}{y} \PY{o}{=} \PY{n}{set\PYZus{}1}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{All Enteric}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{n}{z} \PY{o}{=} \PY{n}{set\PYZus{}1}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{All\PYZus{}per\PYZus{}MMcap}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        
+        \PY{n}{rch}\PY{o}{.}\PY{n}{regression\PYZus{}4\PYZus{}by\PYZus{}4}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{z}\PY{p}{,} \PY{n}{cols} \PY{o}{=} \PY{l+m+mi}{2}\PY{p}{,} \PY{n}{rows} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{,} 
+                          \PY{n}{suptitle} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Isolated Enteric Bacteria}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                          \PY{n}{subtitle\PYZus{}0} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Unscaled}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{subtitle\PYZus{}1} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Scale by Population}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                          \PY{n}{xmin} \PY{o}{=} \PY{l+m+mi}{1995}\PY{p}{,} \PY{n}{xmax} \PY{o}{=} \PY{l+m+mi}{2016}\PY{p}{,} 
+                          \PY{n}{xticks} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{1995}\PY{p}{,} \PY{l+m+mi}{2000}\PY{p}{,} \PY{l+m+mi}{2005}\PY{p}{,} \PY{l+m+mi}{2010}\PY{p}{,} \PY{l+m+mi}{2016}\PY{p}{)}\PY{p}{,}
+                          \PY{n}{xlabels} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Year Isolated}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ylabels} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Count of Isolates}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_21_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{longtable}[]{@{}llllll@{}}
+\toprule
+Table 4.1.2-a & Set & Slope & Intercept & \(R^{2}\) & p\tabularnewline
+\midrule
+\endhead
+& Raw & 141.5 & -281056.13 & 0.87 & \textless{}0.0001\tabularnewline
+& Scaled & 0.4 & -799.04 & 0.81 & \textless{}0.0001\tabularnewline
+\bottomrule
+\end{longtable}
+
+The data were modeled by ordinary least squares. The fitted line,
+confidence intervals, and prediction intervals were calculated from the
+models.
+
+\begin{longtable}[]{@{}llllll@{}}
+\toprule
+Table 4.1.2-b & Set & Input & 95\% Lower PI & Prediction & 95\% Lower
+PI\tabularnewline
+\midrule
+\endhead
+& Raw & 2025 & 4584 & 5477 & 6370\tabularnewline
+& Scaled & 2025 & 14 & 17 & 20\tabularnewline
+\bottomrule
+\end{longtable}
+
+There is good evidence that a linear model fits the data, \emph{cf.}
+sections 6.2 and 6.3.
+
+    \hypertarget{isolated-genera-by-year}{%
+\paragraph{Isolated Genera by Year}\label{isolated-genera-by-year}}
+
+    Each of the four bacterial genera are increasing by year over the period
+covered by the data.
+
+Each of the four genera of enteric bacteria isolated in the monitoring
+program are increasing. \emph{Salmonella} has the largest number of
+incidences and is increasing at around 64 cases per year.
+\emph{Campylobacter} has somewhat less number of incidences and
+increases about the same rate, around 69 cases per year. \emph{Shigella}
+and \emph{Escherichia} have fewer incidences and lesser rates, around
+0.4 and 14 respectively.
+
+A linear regression was performed in each case. On all charts, the blue
+dots are the plotted data, the blue dashed line is the fitted data, the
+light blue area is the confidence interval for the line, and the red
+dashed lines are the prediction intervals for the data.
+
+The data were modeled by ordinary least squares. The fitted line,
+confidence intervals, and prediction intervals were calculated from the
+models.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{x} \PY{o}{=} \PY{n}{set\PYZus{}1}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Data Year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{n}{y1} \PY{o}{=} \PY{n}{set\PYZus{}1}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Campylobacter}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{n}{y2} \PY{o}{=} \PY{n}{set\PYZus{}1}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Escherichia}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{n}{y3} \PY{o}{=} \PY{n}{set\PYZus{}1}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Salmonella}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{n}{y4} \PY{o}{=} \PY{n}{set\PYZus{}1}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Shigella}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        
+        
+        \PY{n}{rch}\PY{o}{.}\PY{n}{regression\PYZus{}4\PYZus{}by\PYZus{}4}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y1}\PY{p}{,} \PY{n}{y2}\PY{p}{,} \PY{n}{y3}\PY{p}{,} \PY{n}{y4}\PY{p}{,} \PY{n}{cols} \PY{o}{=} \PY{l+m+mi}{2}\PY{p}{,} \PY{n}{rows} \PY{o}{=} \PY{l+m+mi}{2}\PY{p}{,} 
+                          \PY{n}{suptitle} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Isolated Enteric Bacteria}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                          \PY{n}{subtitle\PYZus{}0} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Campylobacter}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{subtitle\PYZus{}1} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Escherichia}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                          \PY{n}{subtitle\PYZus{}2} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Salmonella}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{subtitle\PYZus{}3} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Shigella}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                          \PY{n}{xmin} \PY{o}{=} \PY{l+m+mi}{1995}\PY{p}{,} \PY{n}{xmax} \PY{o}{=} \PY{l+m+mi}{2016}\PY{p}{,} 
+                          \PY{n}{xticks} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{1995}\PY{p}{,} \PY{l+m+mi}{2000}\PY{p}{,} \PY{l+m+mi}{2005}\PY{p}{,} \PY{l+m+mi}{2010}\PY{p}{,} \PY{l+m+mi}{2016}\PY{p}{)}\PY{p}{,}
+                          \PY{n}{xlabels} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Year Isolated}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ylabels} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Count of Isolates}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_25_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{longtable}[]{@{}llllll@{}}
+\toprule
+Table 4.1.3-a & Set & Intercept & Slope & \(R^{2}\) & p\tabularnewline
+\midrule
+\endhead
+& Campylobacter & -137682.27 & 68.98 & 0.87 &
+\textless{}0.0001\tabularnewline
+& Escherichia & 12267.07 & -6.03 & 0.31 & 0.0109\tabularnewline
+& Salmonella & -127514.02 & 64.38 & 0.82 &
+\textless{}0.0001\tabularnewline
+& Shigella & -28126.91 & 14.17 & 0.34 & 0.0074\tabularnewline
+\bottomrule
+\end{longtable}
+
+The data were modeled by ordinary least squares. The fitted line,
+confidence intervals, and prediction intervals were calculated from the
+models.
+
+\begin{longtable}[]{@{}llllll@{}}
+\toprule
+Table 4.1.3-b & Set & Input & 95\% Lower PI & Prediction & 95\% Lower
+PI\tabularnewline
+\midrule
+\endhead
+& Campylobacter & 2025 & 1566 & 2008 & 2449\tabularnewline
+& Escherichia & 2025 & 0 & 55 & 201\tabularnewline
+& Salmonella & 2025 & 2356 & 2852 & 3347\tabularnewline
+& Shignella & 2025 & 239 & 563 & 887\tabularnewline
+\bottomrule
+\end{longtable}
+
+There is good evidence that a linear model fits the data, \emph{cf.}
+sections 6.4 through 6.7.
+
+    \hypertarget{isolated-genera-by-year-per-million-people}{%
+\paragraph{Isolated Genera by Year per Million
+People}\label{isolated-genera-by-year-per-million-people}}
+
+    Each of the four bacterial genera are increasing by year over the period
+covered by the data.
+
+Each of the four genera of enteric bacteria isolated in the monitoring
+program are increasing. \emph{Salmonella} has the largest number of
+incidences and is increasing at around 64 cases per year.
+\emph{Campylobacter} has somewhat less number of incidences and
+increases about the same rate, around 69 cases per year. \emph{Shigella}
+and \emph{Escherichia} have fewer incidences and lesser rates, around
+0.4 and 14 respectively.
+
+A linear regression was performed in each case. On all charts, the blue
+dots are the plotted data, the blue dashed line is the fitted data, the
+light blue area is the confidence interval for the line, and the red
+dashed lines are the prediction intervals for the data.
+
+The data were modeled by ordinary least squares. The fitted line,
+confidence intervals, and prediction intervals were calculated from the
+models.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{x} \PY{o}{=} \PY{n}{set\PYZus{}1}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Data Year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{n}{y1} \PY{o}{=} \PY{n}{set\PYZus{}1}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Campylobacter\PYZus{}per\PYZus{}MMcap}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{n}{y2} \PY{o}{=} \PY{n}{set\PYZus{}1}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Escherichia\PYZus{}per\PYZus{}MMcap}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{n}{y3} \PY{o}{=} \PY{n}{set\PYZus{}1}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Salmonella\PYZus{}per\PYZus{}MMcap}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{n}{y4} \PY{o}{=} \PY{n}{set\PYZus{}1}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Shigella\PYZus{}per\PYZus{}MMcap}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        
+        \PY{n}{rch}\PY{o}{.}\PY{n}{regression\PYZus{}4\PYZus{}by\PYZus{}4}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y1}\PY{p}{,} \PY{n}{y2}\PY{p}{,} \PY{n}{y3}\PY{p}{,} \PY{n}{y4}\PY{p}{,} \PY{n}{cols} \PY{o}{=} \PY{l+m+mi}{2}\PY{p}{,} \PY{n}{rows} \PY{o}{=} \PY{l+m+mi}{2}\PY{p}{,} 
+                          \PY{n}{suptitle} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Isolated Enteric Bacteria Scaled to Population}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                          \PY{n}{subtitle\PYZus{}0} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Camylobacter}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{subtitle\PYZus{}1} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Escherichia}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                          \PY{n}{subtitle\PYZus{}2} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Salmonella}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{subtitle\PYZus{}3} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Shigella}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                          \PY{n}{xmin} \PY{o}{=} \PY{l+m+mi}{1995}\PY{p}{,} \PY{n}{xmax} \PY{o}{=} \PY{l+m+mi}{2016}\PY{p}{,} 
+                          \PY{n}{xticks} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{1995}\PY{p}{,} \PY{l+m+mi}{2000}\PY{p}{,} \PY{l+m+mi}{2005}\PY{p}{,} \PY{l+m+mi}{2010}\PY{p}{,} \PY{l+m+mi}{2016}\PY{p}{)}\PY{p}{,}
+                          \PY{n}{xlabels} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Year Isolated}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ylabels} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Count of Isolates}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_29_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{longtable}[]{@{}llllll@{}}
+\toprule
+Table 4.1.4-a & Set & Intercept & Slope & \(R^{2}\) & p\tabularnewline
+\midrule
+\endhead
+& Campylobacter & -427.75 & 0.21 & 0.85 &
+\textless{}0.0001\tabularnewline
+& Escherichia & 51.82 & -0.03 & 0.39 & 0.003\tabularnewline
+& Salmonella & -341.26 & 0.17 & 0.72 & \textless{}0.0001\tabularnewline
+& Shigella & -81.85 & 0.04 & 0.26 & 0.022\tabularnewline
+\bottomrule
+\end{longtable}
+
+The data were modeled by ordinary least squares. The fitted line,
+confidence intervals, and prediction intervals were calculated from the
+models.
+
+\begin{longtable}[]{@{}llllll@{}}
+\toprule
+Table 5.1.2-b & Set & Input & 95\% Lower PI & Prediction & 95\% Lower
+PI\tabularnewline
+\midrule
+\endhead
+& Campylobacter & 2025 & 5 & 6 & 8\tabularnewline
+& Escherichia & 2025 & 0 & 0 & 1\tabularnewline
+& Salmonella & 2025 & 7 & 9 & 10\tabularnewline
+& Shignella & 2025 & 1 & 2 & 3\tabularnewline
+\bottomrule
+\end{longtable}
+
+There is good evidence that a linear model fits the data, \emph{cf.}
+sections 7.1.2 and 7.1.3.
+
+    Note: Scaling the data by US population does not change the trend or any
+conclusion from analysis. Data will not be scaled by population in the
+remaining analysis.
+
+    \hypertarget{trends-in-resistance}{%
+\subsubsection{Trends in Resistance}\label{trends-in-resistance}}
+
+    \hypertarget{all-isolates-by-year}{%
+\paragraph{All Isolates by Year}\label{all-isolates-by-year}}
+
+    The overall trend is increasings isolates and an increase in resistant
+bacteria over the last few years.
+
+Isolates may be tested against some or all of the 31 antibiotics in the
+study.
+
+Two chart types are shown below. The charts in the left column are
+scatter plots with regression analysis. The blue markers are the data
+points, the blue dashed line is the regression, the blue shaded area is
+the 95\% confidence interval for the line, and the red dashed line is
+the 95\% prediction interval for the data. The charts in the right
+column are proportion run charts. The blue markers and dashed line is
+the data and the red lines are the upper and lower control limit. The
+data is calculated by dividing the value of the resistance category by
+the total of all categories. On all charts, the x axis is year the
+specimen was assayed.
+
+Susceptible indicates that the isolate was susceptible to a particular
+antimicrobial. Intermediates means that the isolate was moderately
+resistant, and resistant means that the isolate was completely resistant
+to a particular antimicrobial.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{set\PYZus{}2\PYZus{}All} \PY{o}{=} \PY{n}{rl}\PY{o}{.}\PY{n}{resistance\PYZus{}level}\PY{p}{(}\PY{n}{df}\PY{p}{,} \PY{n}{pop}\PY{p}{)}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{set\PYZus{}2\PYZus{}All}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{x} \PY{o}{=} \PY{n}{set\PYZus{}2\PYZus{}All}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Data Year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{n}{y1} \PY{o}{=} \PY{n}{set\PYZus{}2\PYZus{}All}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sum\PYZus{}S}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{n}{y2} \PY{o}{=} \PY{n}{set\PYZus{}2\PYZus{}All}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sum\PYZus{}I}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{n}{y3} \PY{o}{=} \PY{n}{set\PYZus{}2\PYZus{}All}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sum\PYZus{}R}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        
+        \PY{n}{rp}\PY{o}{.}\PY{n}{regression\PYZus{}and\PYZus{}p\PYZus{}chart}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y1}\PY{p}{,} \PY{n}{y2}\PY{p}{,} \PY{n}{y3}\PY{p}{,} \PY{n}{suptitle} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{All Isolates}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                              \PY{n}{subtitle\PYZus{}0} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Observed Susceptible}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                              \PY{n}{subtitle\PYZus{}1} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Proportion Susceptible}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                              \PY{n}{subtitle\PYZus{}2} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Observed Intermediate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                              \PY{n}{subtitle\PYZus{}3} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Proportion Intermediate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                              \PY{n}{subtitle\PYZus{}4} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Observed Resistant}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                              \PY{n}{subtitle\PYZus{}5} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Proportion Resistant}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                              \PY{n}{xlabels\PYZus{}r} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{xlabels\PYZus{}p} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                              \PY{n}{xmin} \PY{o}{=} \PY{l+m+mi}{1995}\PY{p}{,} \PY{n}{xmax} \PY{o}{=} \PY{l+m+mi}{2016}\PY{p}{,} 
+                              \PY{n}{xticks} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{1996}\PY{p}{,} \PY{l+m+mi}{2001}\PY{p}{,} \PY{l+m+mi}{2006}\PY{p}{,} \PY{l+m+mi}{2011}\PY{p}{,} \PY{l+m+mi}{2015}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_36_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    The last three years of the data set show an increasing proportion
+resistant bacteria and a corresponding decrease in susceptible bacteria.
+
+    \hypertarget{campylobacter}{%
+\paragraph{\texorpdfstring{\emph{Campylobacter}}{Campylobacter}}\label{campylobacter}}
+
+    \emph{Campylobacter} has not shown an increase in resistance.
+
+About 13\% of the isolates were consistently resistant during the
+monitoring period. No intermediate resistant isolates were found.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{set\PYZus{}2\PYZus{}Ca} \PY{o}{=} \PY{n}{rl}\PY{o}{.}\PY{n}{resistance\PYZus{}level}\PY{p}{(}\PY{n}{df}\PY{p}{,} \PY{n}{pop}\PY{p}{)}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{set\PYZus{}2\PYZus{}Ca}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{x} \PY{o}{=} \PY{n}{set\PYZus{}2\PYZus{}Ca}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Data Year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{n}{y1} \PY{o}{=} \PY{n}{set\PYZus{}2\PYZus{}Ca}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sum\PYZus{}S}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{n}{y2} \PY{o}{=} \PY{n}{set\PYZus{}2\PYZus{}Ca}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sum\PYZus{}I}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{n}{y3} \PY{o}{=} \PY{n}{set\PYZus{}2\PYZus{}Ca}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sum\PYZus{}R}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        
+        \PY{n}{rp}\PY{o}{.}\PY{n}{regression\PYZus{}and\PYZus{}p\PYZus{}chart}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y1}\PY{p}{,} \PY{n}{y2}\PY{p}{,} \PY{n}{y3}\PY{p}{,} \PY{n}{suptitle} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Campylobacter}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                              \PY{n}{subtitle\PYZus{}0} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Observed Susceptible}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                              \PY{n}{subtitle\PYZus{}1} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Proportion Susceptible}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                              \PY{n}{subtitle\PYZus{}2} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Observed Intermediate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                              \PY{n}{subtitle\PYZus{}3} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Proportion Intermediate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                              \PY{n}{subtitle\PYZus{}4} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Observed Resistant}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                              \PY{n}{subtitle\PYZus{}5} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Proportion Resistant}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                              \PY{n}{xlabels\PYZus{}r} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{xlabels\PYZus{}p} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                              \PY{n}{xmin} \PY{o}{=} \PY{l+m+mi}{1995}\PY{p}{,} \PY{n}{xmax} \PY{o}{=} \PY{l+m+mi}{2016}\PY{p}{,} 
+                              \PY{n}{xticks} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{1996}\PY{p}{,} \PY{l+m+mi}{2001}\PY{p}{,} \PY{l+m+mi}{2006}\PY{p}{,} \PY{l+m+mi}{2011}\PY{p}{,} \PY{l+m+mi}{2015}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_40_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{escherichia}{%
+\paragraph{\texorpdfstring{\emph{Escherichia}}{Escherichia}}\label{escherichia}}
+
+    \emph{Escherichia} may be showing an increase in resistance.
+
+\emph{Escherichia} may be increasing in resistance. The proportion of
+susceptible bacteria has decreased in the last few years of the period
+covered by the data, especially in 2015, the last year. Resistant
+bacteria have shown a corresponding increase.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{set\PYZus{}2\PYZus{}Es} \PY{o}{=} \PY{n}{rl}\PY{o}{.}\PY{n}{resistance\PYZus{}level}\PY{p}{(}\PY{n}{df}\PY{p}{,} \PY{n}{pop}\PY{p}{)}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{set\PYZus{}2\PYZus{}Es}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{x} \PY{o}{=} \PY{n}{set\PYZus{}2\PYZus{}Es}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Data Year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{y1} \PY{o}{=} \PY{n}{set\PYZus{}2\PYZus{}Es}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sum\PYZus{}S}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{y2} \PY{o}{=} \PY{n}{set\PYZus{}2\PYZus{}Es}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sum\PYZus{}I}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{y3} \PY{o}{=} \PY{n}{set\PYZus{}2\PYZus{}Es}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sum\PYZus{}R}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         
+         \PY{n}{rp}\PY{o}{.}\PY{n}{regression\PYZus{}and\PYZus{}p\PYZus{}chart}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y1}\PY{p}{,} \PY{n}{y2}\PY{p}{,} \PY{n}{y3}\PY{p}{,} \PY{n}{suptitle} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Escherichia}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                               \PY{n}{subtitle\PYZus{}0} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Observed Susceptible}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                               \PY{n}{subtitle\PYZus{}1} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Proportion Susceptible}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                               \PY{n}{subtitle\PYZus{}2} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Observed Intermediate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                               \PY{n}{subtitle\PYZus{}3} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Proportion Intermediate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                               \PY{n}{subtitle\PYZus{}4} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Observed Resistant}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                               \PY{n}{subtitle\PYZus{}5} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Proportion Resistant}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                               \PY{n}{xlabels\PYZus{}r} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{xlabels\PYZus{}p} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                               \PY{n}{xmin} \PY{o}{=} \PY{l+m+mi}{1995}\PY{p}{,} \PY{n}{xmax} \PY{o}{=} \PY{l+m+mi}{2016}\PY{p}{,} 
+                               \PY{n}{xticks} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{1996}\PY{p}{,} \PY{l+m+mi}{2001}\PY{p}{,} \PY{l+m+mi}{2006}\PY{p}{,} \PY{l+m+mi}{2011}\PY{p}{,} \PY{l+m+mi}{2015}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_43_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{salmonella}{%
+\paragraph{\texorpdfstring{\emph{Salmonella}}{Salmonella}}\label{salmonella}}
+
+    Resistant \emph{Salmonella} may be increasing.
+
+In the last four years of the period covering the data, susceptible
+bacteria decrease and resistant bacteria have a corresponding increase.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{set\PYZus{}2\PYZus{}Sa} \PY{o}{=} \PY{n}{rl}\PY{o}{.}\PY{n}{resistance\PYZus{}level}\PY{p}{(}\PY{n}{df}\PY{p}{,} \PY{n}{pop}\PY{p}{)}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{set\PYZus{}2\PYZus{}Sa}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{x} \PY{o}{=} \PY{n}{set\PYZus{}2\PYZus{}Sa}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Data Year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{y1} \PY{o}{=} \PY{n}{set\PYZus{}2\PYZus{}Sa}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sum\PYZus{}S}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{y2} \PY{o}{=} \PY{n}{set\PYZus{}2\PYZus{}Sa}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sum\PYZus{}I}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{y3} \PY{o}{=} \PY{n}{set\PYZus{}2\PYZus{}Sa}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sum\PYZus{}R}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         
+         \PY{n}{rp}\PY{o}{.}\PY{n}{regression\PYZus{}and\PYZus{}p\PYZus{}chart}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y1}\PY{p}{,} \PY{n}{y2}\PY{p}{,} \PY{n}{y3}\PY{p}{,} \PY{n}{suptitle} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Salmonella}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                               \PY{n}{subtitle\PYZus{}0} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Observed Susceptible}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                               \PY{n}{subtitle\PYZus{}1} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Proportion Susceptible}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                               \PY{n}{subtitle\PYZus{}2} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Observed Intermediate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                               \PY{n}{subtitle\PYZus{}3} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Proportion Intermediate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                               \PY{n}{subtitle\PYZus{}4} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Observed Resistant}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                               \PY{n}{subtitle\PYZus{}5} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Proportion Resistant}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                               \PY{n}{xlabels\PYZus{}r} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{xlabels\PYZus{}p} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                               \PY{n}{xmin} \PY{o}{=} \PY{l+m+mi}{1995}\PY{p}{,} \PY{n}{xmax} \PY{o}{=} \PY{l+m+mi}{2016}\PY{p}{,} 
+                               \PY{n}{xticks} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{1996}\PY{p}{,} \PY{l+m+mi}{2001}\PY{p}{,} \PY{l+m+mi}{2006}\PY{p}{,} \PY{l+m+mi}{2011}\PY{p}{,} \PY{l+m+mi}{2015}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_46_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{shigella}{%
+\paragraph{\texorpdfstring{\emph{Shigella}}{Shigella}}\label{shigella}}
+
+    There have been little change in resistance for \emph{Shigella}.
+
+Over the period covering the data, resistance of \emph{Shigella} has
+remained constant.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{set\PYZus{}2\PYZus{}Sh} \PY{o}{=} \PY{n}{rl}\PY{o}{.}\PY{n}{resistance\PYZus{}level}\PY{p}{(}\PY{n}{df}\PY{p}{,} \PY{n}{pop}\PY{p}{)}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{set\PYZus{}2\PYZus{}Sh}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{x} \PY{o}{=} \PY{n}{set\PYZus{}2\PYZus{}Sh}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Data Year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{y1} \PY{o}{=} \PY{n}{set\PYZus{}2\PYZus{}Sh}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sum\PYZus{}S}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{y2} \PY{o}{=} \PY{n}{set\PYZus{}2\PYZus{}Sh}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sum\PYZus{}I}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{y3} \PY{o}{=} \PY{n}{set\PYZus{}2\PYZus{}Sh}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sum\PYZus{}R}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         
+         \PY{n}{rp}\PY{o}{.}\PY{n}{regression\PYZus{}and\PYZus{}p\PYZus{}chart}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y1}\PY{p}{,} \PY{n}{y2}\PY{p}{,} \PY{n}{y3}\PY{p}{,} \PY{n}{suptitle} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Salmonella}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                               \PY{n}{subtitle\PYZus{}0} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Observed Susceptible}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                               \PY{n}{subtitle\PYZus{}1} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Proportion Susceptible}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                               \PY{n}{subtitle\PYZus{}2} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Observed Intermediate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                               \PY{n}{subtitle\PYZus{}3} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Proportion Intermediate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                               \PY{n}{subtitle\PYZus{}4} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Observed Resistant}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                               \PY{n}{subtitle\PYZus{}5} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Proportion Resistant}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                               \PY{n}{xlabels\PYZus{}r} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{xlabels\PYZus{}p} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                               \PY{n}{xmin} \PY{o}{=} \PY{l+m+mi}{1995}\PY{p}{,} \PY{n}{xmax} \PY{o}{=} \PY{l+m+mi}{2016}\PY{p}{,} 
+                               \PY{n}{xticks} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{1996}\PY{p}{,} \PY{l+m+mi}{2001}\PY{p}{,} \PY{l+m+mi}{2006}\PY{p}{,} \PY{l+m+mi}{2011}\PY{p}{,} \PY{l+m+mi}{2015}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_49_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{comparisons-of-categories}{%
+\subsubsection{Comparisons of
+Categories}\label{comparisons-of-categories}}
+
+    Resistant and intermediate resistant bacteria were compared to the
+region where isolated, patient age group, and culture source.
+Significant difference were found between the categories.
+
+    \hypertarget{resistance-by-department-of-health-and-human-services-hhs-regions}{%
+\paragraph{Resistance by Department of Health and Human Services (HHS)
+Regions}\label{resistance-by-department-of-health-and-human-services-hhs-regions}}
+
+    There are significant difference in the incidences of resistant and
+intermediate resistant bacteria for HHS regions.
+
+Regions 4 and 5 (Mid-West and South) had the greatest incidences and
+regions 7 and 10 (The Plains states and Pacific Northwest including
+Alaska) had the least incidences.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{series\PYZus{}2\PYZus{}All\PYZus{}region} \PY{o}{=} \PY{n}{rl}\PY{o}{.}\PY{n}{resistance\PYZus{}level}\PY{p}{(}\PY{n}{df}\PY{p}{,} \PY{n}{pop}\PY{p}{)}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{series\PYZus{}2\PYZus{}All\PYZus{}region}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+         \PY{n}{width} \PY{o}{=} \PY{l+m+mf}{1.0}     \PY{c+c1}{\PYZsh{} the width of the bars: can also be len(x) sequence}
+         \PY{n}{n} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{series\PYZus{}2\PYZus{}All\PYZus{}region}\PY{p}{)}
+         \PY{n}{ind} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{n}\PY{p}{)}
+         \PY{n}{p1} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{bar}\PY{p}{(}\PY{n}{ind}\PY{p}{,} \PY{n}{series\PYZus{}2\PYZus{}All\PYZus{}region}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sum\PYZus{}I}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{width}\PY{p}{)}
+         \PY{n}{p2} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{bar}\PY{p}{(}\PY{n}{ind}\PY{p}{,} \PY{n}{series\PYZus{}2\PYZus{}All\PYZus{}region}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sum\PYZus{}R}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{width}\PY{p}{,} \PYZbs{}
+                      \PY{n}{bottom} \PY{o}{=} \PY{n}{series\PYZus{}2\PYZus{}All\PYZus{}region}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sum\PYZus{}I}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Incedence}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Assayed Resistance by Region}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{ind}\PY{p}{,} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Region 1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Region 2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Region 3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Region 4}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Region 5}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PYZbs{}
+                          \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Region 6}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Region 7}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Region 8}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Region 9}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Region 10}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(} \PY{p}{(}\PY{n}{p1}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{p2}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{p}{(} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Intermediate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Resistant}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_54_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n}{stats}\PY{o}{.}\PY{n}{chisquare}\PY{p}{(}\PY{n}{series\PYZus{}2\PYZus{}All\PYZus{}region}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sum\PYZus{}I}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}14}]:} Power\_divergenceResult(statistic=2303.0225352112675, pvalue=0.0)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{n}{stats}\PY{o}{.}\PY{n}{chisquare}\PY{p}{(}\PY{n}{series\PYZus{}2\PYZus{}All\PYZus{}region}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sum\PYZus{}R}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}15}]:} Power\_divergenceResult(statistic=18184.93986424259, pvalue=0.0)
+\end{Verbatim}
+            
+    \hypertarget{resistance-by-age-group}{%
+\paragraph{Resistance by Age Group}\label{resistance-by-age-group}}
+
+    There are significant difference in the incidences of resistant and
+intermediate resistant bacteria for patient age group.
+
+Patients of 0 to 4 years have the greatest incidences and patients 80
+years or greater had the least.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{n}{series\PYZus{}2\PYZus{}All\PYZus{}age} \PY{o}{=} \PY{n}{rl}\PY{o}{.}\PY{n}{resistance\PYZus{}level}\PY{p}{(}\PY{n}{df}\PY{p}{,} \PY{n}{pop}\PY{p}{)}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{series\PYZus{}2\PYZus{}All\PYZus{}age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+         \PY{n}{width} \PY{o}{=} \PY{l+m+mf}{1.0}       \PY{c+c1}{\PYZsh{} the width of the bars: can also be len(x) sequence}
+         \PY{n}{N} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{series\PYZus{}2\PYZus{}All\PYZus{}age}\PY{p}{)}
+         \PY{n}{ind} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{N}\PY{p}{)}
+         \PY{n}{p3} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{bar}\PY{p}{(}\PY{n}{ind}\PY{p}{,} \PY{n}{series\PYZus{}2\PYZus{}All\PYZus{}age}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sum\PYZus{}I}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{width}\PY{p}{)}
+         \PY{n}{p4} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{bar}\PY{p}{(}\PY{n}{ind}\PY{p}{,} \PY{n}{series\PYZus{}2\PYZus{}All\PYZus{}age}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sum\PYZus{}R}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{width}\PY{p}{,} \PYZbs{}
+                      \PY{n}{bottom} \PY{o}{=} \PY{n}{series\PYZus{}2\PYZus{}All\PYZus{}age}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sum\PYZus{}I}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Incedence}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Assayed Resistance by Age Group}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{ind}\PY{p}{,} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{=}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{=}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{0\PYZhy{}4}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{=}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{5\PYZhy{}9}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{=}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{10\PYZhy{}19}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{=}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{20\PYZhy{}29}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PYZbs{}
+                          \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{=}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{30\PYZhy{}39}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{=}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{40\PYZhy{}49}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{=}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{50\PYZhy{}59}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{=}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{60\PYZhy{}69}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PYZbs{}
+                          \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{=}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{70\PYZhy{}79}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{=}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{80+}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{(} \PY{n}{p3}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{p4}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Intermediate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Resistant}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_59_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n}{stats}\PY{o}{.}\PY{n}{chisquare}\PY{p}{(}\PY{n}{series\PYZus{}2\PYZus{}All\PYZus{}age}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sum\PYZus{}I}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}17}]:} Power\_divergenceResult(statistic=2465.587605633803, pvalue=0.0)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{n}{stats}\PY{o}{.}\PY{n}{chisquare}\PY{p}{(}\PY{n}{series\PYZus{}2\PYZus{}All\PYZus{}age}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sum\PYZus{}R}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}18}]:} Power\_divergenceResult(statistic=13664.087764778116, pvalue=0.0)
+\end{Verbatim}
+            
+    \hypertarget{resistance-by-isolate-source}{%
+\paragraph{Resistance by Isolate
+Source}\label{resistance-by-isolate-source}}
+
+    The majority of resistant bacteria were collected from stool.
+
+As might be expected for enteric bacteria, the majority of isolates were
+collected from stool.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{n}{series\PYZus{}2\PYZus{}All\PYZus{}source} \PY{o}{=} \PY{n}{rl}\PY{o}{.}\PY{n}{resistance\PYZus{}level}\PY{p}{(}\PY{n}{df}\PY{p}{,} \PY{n}{pop}\PY{p}{)}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{series\PYZus{}2\PYZus{}All\PYZus{}source}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+         \PY{n}{width} \PY{o}{=} \PY{l+m+mf}{1.0}      \PY{c+c1}{\PYZsh{} the width of the bars: can also be len(x) sequence}
+         \PY{n}{N} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{series\PYZus{}2\PYZus{}All\PYZus{}source}\PY{p}{)}
+         \PY{n}{ind} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{N}\PY{p}{)}
+         \PY{n}{p5} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{bar}\PY{p}{(}\PY{n}{ind}\PY{p}{,} \PY{n}{series\PYZus{}2\PYZus{}All\PYZus{}source}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sum\PYZus{}I}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{width}\PY{p}{)}
+         \PY{n}{p6} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{bar}\PY{p}{(}\PY{n}{ind}\PY{p}{,} \PY{n}{series\PYZus{}2\PYZus{}All\PYZus{}source}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sum\PYZus{}R}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{width}\PY{p}{,} \PYZbs{}
+                      \PY{n}{bottom} \PY{o}{=} \PY{n}{series\PYZus{}2\PYZus{}All\PYZus{}source}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sum\PYZus{}I}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Incedence}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Assayed Resistance by Region}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{ind}\PY{p}{,} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Abscess}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Blood}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CSF}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Gall Bladder}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Stool}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PYZbs{}
+                          \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Urine}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Wound}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Not Given}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Other}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Unknown}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{(}\PY{n}{p5}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{p6}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Intermediate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Resistant}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_64_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{n}{stats}\PY{o}{.}\PY{n}{chisquare}\PY{p}{(}\PY{n}{series\PYZus{}2\PYZus{}All\PYZus{}source}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sum\PYZus{}I}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}20}]:} Power\_divergenceResult(statistic=29290.832955832393, pvalue=0.0)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{n}{stats}\PY{o}{.}\PY{n}{chisquare}\PY{p}{(}\PY{n}{series\PYZus{}2\PYZus{}All\PYZus{}source}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sum\PYZus{}R}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}21}]:} Power\_divergenceResult(statistic=376846.84418484796, pvalue=0.0)
+\end{Verbatim}
+            
+    \hypertarget{discussion}{%
+\subsection{Discussion}\label{discussion}}
+
+    The World Health Organization has found increase in antimicrobial
+resistance in every region of the world. Antimicrobial resistance
+contributes to 23,000 deaths per year in the US and 25,000 deaths per
+year in the EU. High proportion of resistance is found in all world
+regions. Overuse of antimicrobial drugs have led to the proliferation of
+resistant bacteria. The National Antimicrobial Resistance Monitoring
+System (NARMS) is a collaborative program of the US Food and Drug
+Administration (FDA), the Centers for Disease Control (CDC), US
+Department of Agriculture (USDA), and state and local public health
+departments. The program monitors the incidences of antimicrobial
+resistance in communicable and non-communicable bacteria from all
+transmission routes. The CDC has been tracking the incidences of enteric
+antimicrobial resistance since the mid 1990's. The NARMS Enteric
+Bacteria database of the CDC was analyzed to determine if incidences of
+antimicrobial resistance are increasing in enteric bacteria and if any
+regional of demographic patterns emerge. The data frame contains 54352
+rows and 106 columns of specimens isolated from 1996 to 2015.The data
+includes specimen ID, bacterial ID information, region of US where the
+specimen was collected, the sample substrate, some genetic data, and
+resistance measures for 31 antimicrobial compounds. The data does not
+address the prevalence of resistance in the ecosystems, as specimens
+were only collected once a disease was observed. There are a few issues
+with the database that could affect conclusions. The monitoring program
+was initially rolled out to 14 states (1996 to 2002), though at least
+one state was included from each or 10 predefined regions. In 2003 the
+program was expanded nationwide. The process for collecting specimens
+started with an observation of enteric disease, no negative results,
+results that did not isolate bacteria were included in the data.
+
+    \hypertarget{appendix}{%
+\subsection{Appendix}\label{appendix}}
+
+    Residuals from linear regression were tested for normality and random
+distribution by order and fit.
+
+    \hypertarget{residual-analysis-of-us-population}{%
+\subsubsection{Residual Analysis of US
+Population}\label{residual-analysis-of-us-population}}
+
+    US Population does not fit a linear model.
+
+The residuals do not likely fit a normal distribution. There is
+observable curvature in the Q-Q plot. The Anderson Darling test returns
+a p value less than 0.05. Finally, there is a significant pattern in
+residuals by order and residuals by fit.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{n}{x} \PY{o}{=} \PY{n}{pop}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{y} \PY{o}{=} \PY{n}{pop}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Value}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{d} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{norm}\PY{l+s+s1}{\PYZsq{}}
+         \PY{n}{response} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{US Population}\PY{l+s+s1}{\PYZsq{}}
+         
+         \PY{n}{ra}\PY{o}{.}\PY{n}{residual\PYZus{}analysis}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{d}\PY{p}{,} \PY{n}{response}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{savefig}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{chart2.png}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_73_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    
+    \begin{verbatim}
+<Figure size 432x288 with 0 Axes>
+    \end{verbatim}
+
+    
+    \hypertarget{residual-analysis---all-enteric-bacteria}{%
+\subsubsection{Residual Analysis - All Enteric
+Bacteria}\label{residual-analysis---all-enteric-bacteria}}
+
+    All enteric bacteria meets the assumptions of linear regression.
+
+Though there is some curvature in the residuals, there are more
+residuals around 1 and +1 standard deviations than near the center, the
+Anderson Darling test and Kolmogorov--Smirnov test have p values greater
+than 0.05. Residuals against order and fit show no discernible pattern.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{n}{x} \PY{o}{=} \PY{n}{set\PYZus{}1}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Data Year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{y} \PY{o}{=} \PY{n}{set\PYZus{}1}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{All Enteric}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{d} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{norm}\PY{l+s+s1}{\PYZsq{}}
+         \PY{n}{response} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{All Enteric}\PY{l+s+s1}{\PYZsq{}}
+         
+         \PY{n}{ra}\PY{o}{.}\PY{n}{residual\PYZus{}analysis}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{d}\PY{p}{,} \PY{n}{response}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_76_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{all-enteric-by-million-people}{%
+\subsubsection{All Enteric by Million
+People}\label{all-enteric-by-million-people}}
+
+    All enteric bacteria by million people meets the assumptions of linear
+regression.
+
+Again there is a bit of curvature in the residuals, the Anderson Darling
+test and Kolmogorov--Smirnov test have p values greater than 0.05.
+Residuals against order and fit show no discernible pattern.
+
+As with the regression the residuals of the raw data look similar to the
+residuals of the scaled data. The number of enteric bacteria is not
+likely determined by US population.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{n}{x} \PY{o}{=} \PY{n}{set\PYZus{}1}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Data Year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{y} \PY{o}{=} \PY{n}{set\PYZus{}1}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{All\PYZus{}per\PYZus{}MMcap}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{d} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{norm}\PY{l+s+s1}{\PYZsq{}}
+         \PY{n}{response} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{All Enteric per Million People}\PY{l+s+s1}{\PYZsq{}}
+         
+         \PY{n}{ra}\PY{o}{.}\PY{n}{residual\PYZus{}analysis}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{d}\PY{p}{,} \PY{n}{response}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_79_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{campylobacter}{%
+\subsubsection{\texorpdfstring{\emph{Campylobacter}}{Campylobacter}}\label{campylobacter}}
+
+    \emph{Campylobacter} meets the assumptions of linear regression.
+
+The residuals are normal and well dispersed.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{n}{x} \PY{o}{=} \PY{n}{set\PYZus{}1}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Data Year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{y} \PY{o}{=} \PY{n}{set\PYZus{}1}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Campylobacter}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{d} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{norm}\PY{l+s+s1}{\PYZsq{}}
+         \PY{n}{response} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Campylobacter}\PY{l+s+s1}{\PYZsq{}}
+         
+         \PY{n}{ra}\PY{o}{.}\PY{n}{residual\PYZus{}analysis}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{d}\PY{p}{,} \PY{n}{response}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_82_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{escherichia}{%
+\subsubsection{\texorpdfstring{\emph{Escherichia}}{Escherichia}}\label{escherichia}}
+
+    \emph{Escherichia} meets the assumptions of linear regression.
+
+The residuals are normal and well dispersed.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{n}{x} \PY{o}{=} \PY{n}{set\PYZus{}1}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Data Year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{y} \PY{o}{=} \PY{n}{set\PYZus{}1}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Escherichia}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{d} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{norm}\PY{l+s+s1}{\PYZsq{}}
+         \PY{n}{response} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Escherichia}\PY{l+s+s1}{\PYZsq{}}
+         
+         \PY{n}{ra}\PY{o}{.}\PY{n}{residual\PYZus{}analysis}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{d}\PY{p}{,} \PY{n}{response}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_85_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{salmonella}{%
+\subsubsection{\texorpdfstring{\emph{Salmonella}}{Salmonella}}\label{salmonella}}
+
+    \emph{Salmonella} meets the assumptions of linear regression.
+
+The residuals are normal and well dispersed.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{n}{x} \PY{o}{=} \PY{n}{set\PYZus{}1}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Data Year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{y} \PY{o}{=} \PY{n}{set\PYZus{}1}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Salmonella}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{d} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{norm}\PY{l+s+s1}{\PYZsq{}}
+         \PY{n}{response} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Salmonella}\PY{l+s+s1}{\PYZsq{}}
+         
+         \PY{n}{ra}\PY{o}{.}\PY{n}{residual\PYZus{}analysis}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{d}\PY{p}{,} \PY{n}{response}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_88_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{shigella}{%
+\subsubsection{\texorpdfstring{\emph{Shigella}}{Shigella}}\label{shigella}}
+
+    \emph{Shigella} meets the assumptions of linear regression.
+
+The residuals are normal and well dispersed.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{n}{x} \PY{o}{=} \PY{n}{set\PYZus{}1}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Data Year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{y} \PY{o}{=} \PY{n}{set\PYZus{}1}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Shigella}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{d} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{norm}\PY{l+s+s1}{\PYZsq{}}
+         \PY{n}{response} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Shigella}\PY{l+s+s1}{\PYZsq{}}
+         
+         \PY{n}{ra}\PY{o}{.}\PY{n}{residual\PYZus{}analysis}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{d}\PY{p}{,} \PY{n}{response}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_91_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
